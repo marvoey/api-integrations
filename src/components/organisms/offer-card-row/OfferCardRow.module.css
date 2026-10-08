@@ -1,0 +1,146 @@
+.section {
+  width: 100%;
+  background: var(--gradient-dark-navy);
+}
+
+.container {
+  composes: container from "../../../styles/layout.module.css";
+  display: flex;
+  flex-direction: column;
+  padding-block: var(--space-section-block);
+}
+
+@media (width < 1024px) {
+  .container {
+    padding-block: 3rem; /* 48px tablet */
+  }
+}
+
+@media (width < 768px) {
+  .container {
+    padding-block: 2rem; /* 32px mobile */
+  }
+}
+
+.headerRow {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.eyebrow {
+  margin: 0 0 1rem;
+}
+
+.title {
+  margin: 0;
+}
+
+.carouselWrapper {
+  position: relative;
+  width: 100%;
+  margin-top: 2.5rem; /* 40px */
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.viewport {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+
+  /* Give the card hover glow (box-shadow) room to render without being
+     clipped by this viewport's overflow: hidden; the negative margin cancels
+     the padding's effect on surrounding layout. */
+  padding-block: 24px;
+  margin-block: -24px;
+}
+
+.track {
+  display: flex;
+  gap: 2rem; /* 32px */
+  touch-action: pan-y pinch-zoom;
+  margin-left: 0;
+}
+
+@media (width < 1024px) {
+  .track {
+    gap: 1.25rem; /* 20px */
+  }
+}
+
+@media (width < 768px) {
+  .track {
+    gap: 1rem; /* 16px */
+  }
+}
+
+.slide {
+  min-width: 0;
+  display: flex;
+
+  /* Desktop: 3 cards visible */
+  flex: 0 0 calc((100% - 2 * 2rem) / 3);
+}
+
+@media (width < 1024px) {
+  .slide {
+    /* Tablet: 2 cards visible */
+    flex: 0 0 calc((100% - 1.25rem) / 2);
+  }
+}
+
+@media (width < 768px) {
+  .slide {
+    /* Mobile: 1 card visible */
+    flex: 0 0 100%;
+  }
+}
+
+.cardItem {
+  width: 100%;
+  height: 100%;
+}
+
+/* Netflix-style nav: small solid navy panel with a white chevron, always
+   visible, flanking the card row rather than overlapping it. */
+.navButton {
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 24px;
+  height: 120px;
+  border: none;
+  border-radius: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-surface-inverse);
+  color: var(--color-text-inverted);
+  cursor: pointer;
+  padding: 0;
+}
+
+.navButton svg {
+  transition: transform var(--duration-smart) var(--ease-out-smart);
+}
+
+.navButton:focus-visible {
+  outline: var(--focus-ring-width) solid var(--color-focus-ring);
+  outline-offset: var(--focus-ring-offset-inset-lg);
+}
+
+.navButton:hover:not(:disabled) svg {
+  transform: scale(1.15);
+}
+
+.navButton:disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.navButton:disabled svg {
+  opacity: 0.35;
+}

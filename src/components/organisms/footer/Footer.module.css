@@ -1,0 +1,217 @@
+.footerSection {
+  /* Component tokens: declared on the footer root, inherited by every footer element */
+  --space-footer-top: 4rem;          /* 64px */
+  --space-footer-bottom: 7.9375rem;  /* 127px */
+  --space-footer-row-gap: 3rem;      /* 48px */
+  --space-footer-col-gap: 2.5rem;    /* 40px */
+  --color-footer-bg: var(--gradient-dark-navy);
+  --color-footer-text-primary: var(--color-text-inverted);
+  --color-footer-text-muted: var(--color-text-inverted-muted);
+  --color-footer-link-hover: var(--color-aqua-300);
+  --color-footer-border-subtle: var(--color-white-alpha-10);
+
+  background: var(--color-footer-bg);
+  padding-top: var(--space-footer-top);
+  padding-bottom: var(--space-footer-bottom);
+  color: var(--color-footer-text-muted);
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.container {
+  composes: container from "../../../styles/layout.module.css";
+}
+
+/* 2 Rows Grid Container with 48px row gap */
+.gridContainer {
+  display: grid;
+  grid-template-rows: auto auto;
+  row-gap: var(--space-footer-row-gap); /* 48px */
+  width: 100%;
+}
+
+/* Row 1 Layout: Mobile 2-column grid (50% each with 20px gap); brand col spans 100% */
+.row1 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-xl) 20px; /* 32px row gap; strict 20px column gap between 50% width nav columns */
+}
+
+/* Desktop: Strict 5 Columns with 40px column gap */
+@media (width >= 1024px) {
+  .row1 {
+    grid-template-columns: 1.4fr repeat(4, 1fr);
+    gap: 0 var(--space-footer-col-gap); /* no row gap; 40px column gap on desktop */
+  }
+}
+
+/* Column 1: Brand Stack (100% width on mobile, 1 col on desktop) */
+.brandCol {
+  grid-column: 1 / -1; /* Spans full width (100%) on mobile */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-md); /* 16px */
+}
+
+@media (width >= 1024px) {
+  .brandCol {
+    grid-column: auto;
+    width: auto;
+  }
+}
+
+.brandLogo {
+  display: inline-flex;
+  align-items: center;
+  color: var(--color-text-inverted);
+  text-decoration: none;
+  width: 83px;
+  height: 50px;
+}
+
+.brandLogo:focus-visible {
+  outline: var(--focus-ring-width) solid var(--color-footer-link-hover);
+  outline-offset: var(--focus-ring-offset);
+}
+
+.logoImage {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  width: auto;
+  height: auto;
+}
+
+.brandText {
+  color: var(--color-footer-text-primary);
+  margin: 0;
+}
+
+.brandButton {
+  margin-top: var(--space-xs);
+}
+
+/* Columns 2-5: Navigation Columns */
+.navCol {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.navTitle {
+  color: var(--color-footer-text-primary);
+  margin: 0;
+}
+
+.navList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  row-gap: 8px; /* Strict 8px vertical row gap between links */
+}
+
+.footerLink {
+  text-decoration: none;
+  font-weight: var(--font-weight-regular);
+  color: var(--color-footer-text-muted);
+  opacity: 0.7; /* 70% opacity on mobile */
+  transition: color var(--duration-smart) var(--ease-out-smart),
+              opacity var(--duration-smart) var(--ease-out-smart);
+}
+
+.footerLink:hover {
+  text-decoration: none;
+  color: var(--color-footer-link-hover);
+  opacity: 1;
+}
+
+@media (width >= 1024px) {
+  .footerLink {
+    opacity: 0.9; /* 90% opacity on desktop */
+  }
+}
+
+/* Row 2: 1 Full-Width Column */
+.row2 {
+  grid-column: 1 / -1;
+  border-top: 1px solid var(--color-footer-border-subtle);
+  padding-top: var(--space-lg); /* 24px */
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.legalFirstRow {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  gap: var(--space-xs); /* 8px */
+}
+
+.legalAddress {
+  margin: 0;
+}
+
+.legalLinksList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: inline-flex;
+  flex-flow: row wrap;
+  align-items: center;
+  gap: var(--space-xs); /* 8px */
+}
+
+.legalLinkItem {
+  list-style: none;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs); /* 8px */
+}
+
+.legalPipe {
+  color: var(--color-footer-text-muted);
+  opacity: 0.5;
+  user-select: none;
+}
+
+.legalLink {
+  text-decoration: none;
+  font-weight: var(--font-weight-regular);
+  color: var(--color-footer-text-muted);
+  opacity: 0.7; /* 70% mobile */
+  transition: color var(--duration-smart) var(--ease-out-smart),
+              opacity var(--duration-smart) var(--ease-out-smart);
+}
+
+.legalLink:hover {
+  text-decoration: none;
+  color: var(--color-footer-link-hover);
+  opacity: 1;
+}
+
+@media (width >= 1024px) {
+  .legalLink {
+    opacity: 0.9; /* 90% desktop */
+  }
+}
+
+.legalServiceMarks {
+  margin: 0;
+}
+
+.copyrightText {
+  margin: 0;
+}
+
+/* Keyboard focus rings for interactive elements per WCAG 2.2 AA */
+.footerSection a:focus-visible,
+.footerSection button:focus-visible {
+  outline: var(--focus-ring-width) solid var(--color-footer-link-hover);
+  outline-offset: var(--focus-ring-offset);
+}

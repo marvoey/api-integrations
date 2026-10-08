@@ -1,0 +1,23 @@
+.menuList {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  list-style: none;
+}
+
+.menuItemLink {
+  /* No small font-size token exists; inherit keeps the current rendering
+     (the previous undefined token was invalid at computed-value time and inherited). */
+  font-size: inherit;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+  transition: color var(--transition-fast);
+  padding: var(--space-2xs) var(--space-xs);
+  border-radius: var(--radius-sm);
+}
+
+.menuItemLink:hover,
+.menuItemLink:focus-visible {
+  color: var(--color-primary);
+  background-color: var(--color-surface);
+}

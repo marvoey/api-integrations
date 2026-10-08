@@ -1,0 +1,192 @@
+.section {
+  /* Component token (also read by .tabListWrapper, a descendant) */
+  --space-tabbed-icon-cards-margin-bottom: 2rem;  /* 32px */
+
+  width: 100%;
+  container-type: inline-size;
+  margin-bottom: var(--space-tabbed-icon-cards-margin-bottom);
+}
+
+.container {
+  composes: container from "../../../styles/layout.module.css";
+  padding-block: 4rem; /* 64px */
+}
+
+.heading {
+  width: 100%;
+  color: var(--color-primary);
+  margin-bottom: 1.5rem; /* 24px mobile */
+}
+
+.tabListWrapper {
+  position: relative;
+  border-bottom: 1px solid var(--color-border-subtle);
+  margin-bottom: 1rem; /* 16px mobile */
+}
+
+.tabList {
+  position: relative;
+  display: flex;
+  gap: var(--space-xl);
+  margin-bottom: -1px;
+}
+
+.tabButton {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2xs);
+  background: transparent;
+  border: none;
+  border-bottom: 4px solid transparent;
+  padding: 0 0 7px;
+  cursor: pointer;
+  transition: color var(--duration-smart) var(--ease-out-smart);
+}
+
+.tabButton:focus-visible {
+  outline: var(--focus-ring-width) solid var(--color-focus-ring);
+  outline-offset: var(--focus-ring-offset-md);
+}
+
+.tabButtonInactive {
+  /* Component token */
+  --color-tab-inactive: var(--color-navy-400-alpha-75);  /* #07456F at 75% opacity */
+
+  color: var(--color-tab-inactive);
+}
+
+.tabButtonInactive:hover {
+  color: var(--color-primary);
+}
+
+.tabButtonActive {
+  color: var(--color-primary);
+}
+
+.tabIcon {
+  display: inline-flex;
+  flex-shrink: 0;
+}
+
+.activeIndicator {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 4px;
+  background: var(--color-tab-active-border);
+  border-radius: 2px 2px 0 0;
+  pointer-events: none;
+  transform: translateX(0);
+  width: var(--tab-1-width, 94px);
+  transition: transform var(--duration-smart) var(--ease-out-smart),
+    width var(--duration-smart) var(--ease-out-smart);
+  will-change: transform, width;
+}
+
+/* CSS-Tricks Selector Technique: Sibling-driven indicator movement */
+.tabButton:nth-child(1)[aria-selected="true"] ~ .activeIndicator {
+  transform: translateX(0);
+  width: var(--tab-1-width, 94px);
+}
+
+.tabButton:nth-child(2)[aria-selected="true"] ~ .activeIndicator {
+  transform: translateX(var(--tab-2-offset, 138px));
+  width: var(--tab-2-width, 97px);
+}
+
+/* Hover: Indicator slides to the hovered button */
+.tabButton:nth-child(1):hover ~ .activeIndicator {
+  transform: translateX(0);
+  width: var(--tab-1-width, 94px);
+}
+
+.tabButton:nth-child(2):hover ~ .activeIndicator {
+  transform: translateX(var(--tab-2-offset, 138px));
+  width: var(--tab-2-width, 97px);
+}
+
+.panel {
+  animation: panelFadeIn var(--duration-smart) var(--ease-out-smart);
+  outline: none;
+}
+
+.panel:focus-visible {
+  outline: var(--focus-ring-width) solid var(--color-focus-ring);
+  outline-offset: var(--focus-ring-offset-lg);
+  border-radius: var(--radius-md);
+}
+
+@keyframes panelFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.cardGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: stretch;
+  gap: var(--space-md);
+  margin: 0;
+  padding-block: var(--space-sm);
+  padding-inline: 0;
+  list-style: none;
+}
+
+/* Small tablet containers: 2 columns */
+@container (min-width: 480px) {
+  .cardGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Tablet / medium containers: fluid 3-4 columns */
+@container (min-width: 680px) {
+  .cardGrid {
+    grid-template-columns: repeat(auto-fit, minmax(max-content, 1fr));
+  }
+}
+
+/* Desktop / large containers: fluid responsive columns that wrap dynamically without overflowing */
+@container (min-width: 920px) {
+  .cardGrid {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    grid-auto-rows: 176px;
+    align-items: center;
+  }
+}
+
+@media (width >= 860px) {
+  .heading {
+    margin-bottom: 2.25rem; /* 36px desktop */
+  }
+
+  .tabListWrapper {
+    margin-bottom: var(--space-tabbed-icon-cards-margin-bottom);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tabButton {
+    transition: none;
+  }
+
+  .panel {
+    animation: none;
+  }
+}
+
+/* Forced colors (Windows High Contrast): box-shadows are dropped and author colors are replaced
+   by the user's palette, so indicators drawn only with shadows or color changes disappear.
+   System colors restore them: Highlight marks focus, hover and selected states. */
+@media (forced-colors: active) {
+  .activeIndicator {
+    background-color: Highlight;
+  }
+}

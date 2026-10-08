@@ -1,0 +1,338 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  width: 100%;
+  background-color: var(--color-surface-raised);
+  border-bottom: 1px solid var(--color-border-subtle);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: box-shadow var(--duration-smart) var(--ease-out-smart);
+}
+
+.container {
+  composes: container from "../../styles/layout.module.css";
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: clamp(64px, 4rem + 1vw, 80px);
+  gap: var(--space-md);
+}
+
+.brandWrapper {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.brandLink {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  border-radius: var(--radius-sm);
+  transition: opacity var(--duration-smart) var(--ease-out-smart);
+}
+
+.brandLink:hover {
+  opacity: 0.9;
+}
+
+.brandLink:focus-visible {
+  outline: var(--focus-ring-width) solid var(--color-primary);
+  outline-offset: var(--focus-ring-offset-lg);
+}
+
+.logo {
+  display: block;
+  width: 83px;
+  height: 50px;
+}
+
+.nav {
+  display: none;
+}
+
+@media (width >= 1024px) {
+  .nav {
+    display: flex;
+    align-items: center;
+    flex: 1 1 auto;
+    justify-content: flex-start;
+    margin-left: clamp(1.5rem, 1rem + 2vw, 3rem);
+  }
+}
+
+.navList {
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 0.5rem + 1.5vw, 2rem);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navItem {
+  position: static;
+  display: inline-flex;
+}
+
+.navLink {
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+  text-decoration: none;
+  padding-block: var(--space-2xs);
+  position: relative;
+  transition: color var(--duration-smart) var(--ease-out-smart);
+}
+
+.navLink:hover {
+  color: var(--color-accent);
+}
+
+.navLink:focus-visible {
+  outline: var(--focus-ring-width) solid var(--color-focus-ring);
+  outline-offset: var(--focus-ring-offset-lg);
+  border-radius: var(--radius-sm);
+}
+
+.navTrigger {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3xs);
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-2xs) var(--space-sm);
+  border-radius: var(--radius-md);
+  transition: var(--transition-ui);
+}
+
+.navTrigger:hover,
+.navTriggerActive {
+  color: var(--color-text-inverted);
+  background-color: var(--color-primary);
+  font-weight: var(--font-weight-bold);
+}
+
+/* Reserve the bold width up front via a hidden bold copy of the label, so the
+   weight change on hover thickens the glyphs in place instead of widening the
+   trigger and shifting its siblings. */
+.navLabel {
+  display: inline-block;
+}
+
+.navLabel::after {
+  content: attr(data-label);
+  display: block;
+  height: 0;
+  overflow: hidden;
+  visibility: hidden;
+  font-weight: var(--font-weight-bold);
+}
+
+.navTrigger:focus-visible {
+  outline: var(--focus-ring-width) solid var(--color-focus-ring);
+  outline-offset: var(--focus-ring-offset);
+}
+
+.navChevron {
+  transition: transform var(--duration-smart) var(--ease-out-smart);
+}
+
+.navTriggerActive .navChevron {
+  transform: rotate(180deg);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  flex-shrink: 0;
+}
+
+.joinButton,
+.signInButton,
+.ctaButton,
+.secondaryCtaButton {
+  display: none;
+  white-space: nowrap;
+}
+
+/* Ancestor-scoped to win over the Button `.outline` transparent background */
+.header .signInButton,
+.header .mobileSignInButton {
+  background-color: var(--color-grey-95);
+}
+
+@media (width >= 1024px) {
+  .joinButton,
+  .signInButton,
+  .ctaButton,
+  .secondaryCtaButton {
+    display: inline-flex;
+  }
+}
+
+.mobileToggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  background: transparent;
+  border: none;
+  color: var(--color-text-primary);
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+}
+
+@media (width >= 1024px) {
+  .mobileToggle {
+    display: none;
+  }
+}
+
+.mobileToggle:focus-visible {
+  outline: var(--focus-ring-width) solid var(--color-focus-ring);
+  outline-offset: var(--focus-ring-offset);
+}
+
+.hamburger,
+.hamburger::before,
+.hamburger::after {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background-color: currentColor;
+  border-radius: var(--radius-full);
+}
+
+.hamburger {
+  position: relative;
+}
+
+.hamburger::before,
+.hamburger::after {
+  content: "";
+  position: absolute;
+  left: 0;
+}
+
+.hamburger::before {
+  top: -7px;
+}
+
+.hamburger::after {
+  top: 7px;
+}
+
+.mobileDrawer {
+  border-top: 1px solid var(--color-border-subtle);
+  background-color: var(--color-surface-raised);
+  padding: var(--space-md) var(--container-gutter) var(--space-lg);
+}
+
+@media (width >= 1024px) {
+  .mobileDrawer {
+    display: none;
+  }
+}
+
+.mobileList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.mobileItem {
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.mobileLink,
+.mobileTrigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-sm) 0;
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+  text-decoration: none;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+}
+
+.mobileChevronOpen {
+  transform: rotate(180deg);
+}
+
+.mobileAccordion {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  padding-bottom: var(--space-md);
+}
+
+.mobileColumnHeading {
+  margin: 0 0 var(--space-xs);
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.mobileColumnList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xs);
+}
+
+/* Block-level with a minimum height so the whole row is tappable and the target
+   clears the 24px floor in WCAG 2.2 SC 2.5.8; the bare inline text was ~17px. */
+.mobileColumnLink {
+  display: flex;
+  align-items: center;
+  min-block-size: var(--size-target-min);
+  padding-block: var(--space-2xs);
+  font-size: var(--font-size-body-sm);
+  color: var(--color-text-primary);
+  text-decoration: none;
+}
+
+.mobileColumnLink:hover {
+  color: var(--color-primary);
+}
+
+.mobileActions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  margin-top: var(--space-md);
+}
+
+/* Forced colors (Windows High Contrast): the inline SVG logo is filled with a brand token that
+   Chromium does not remap, so it could vanish on a dark system canvas. Following the link's
+   forced text color keeps it visible in every palette. */
+@media (forced-colors: active) {
+  .logo path {
+    fill: currentColor;
+  }
+}

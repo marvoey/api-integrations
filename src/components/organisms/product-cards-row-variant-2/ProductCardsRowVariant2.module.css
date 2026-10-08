@@ -1,0 +1,50 @@
+.section {
+  width: 100%;
+  background-color: var(--color-bg);
+}
+
+.container {
+  composes: container from "../../../styles/layout.module.css";
+  padding-block: var(--space-section-block);
+}
+
+@media (width < 768px) {
+  .container {
+    padding-block: 2rem; /* half, 32px */
+  }
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-xs);
+}
+
+.eyebrow {
+  margin: 0;
+}
+
+.sectionTitle {
+  margin: 0;
+}
+
+.description {
+  margin: 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 1.375rem; /* 22px */
+}
+
+@media (width >= 768px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem 1.375rem; /* row 40px, column 22px */
+  }
+}

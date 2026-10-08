@@ -1,0 +1,377 @@
+/* ==========================================================================
+   Design Tokens - Enterprise Intrinsic Design System
+   Media-Query Agnostic • Fluid Scales via clamp()
+
+   Tiers: primitives (raw values) -> semantic roles -> component intent,
+   plus the foundation scales (type, space, radii, elevation, motion).
+   Semantic and component tokens reference primitives; they never hold raw colors.
+   Tokens used by a single component are declared on that component's root
+   selector in its CSS module (component scope), not here.
+   ========================================================================== */
+
+:root {
+  /* --- Tier 1: Primitives (Zero Semantic Meaning) --- */
+  --color-navy-950: #010E23; /* Footer gradient start */
+  --color-navy-900: #001B3D; /* SwitchSupport gradient end */
+  --color-navy-500: #00395D;
+  --color-navy-850: #003E65;
+  --color-navy-800: #01375A; /* Footer gradient end */
+  --color-aqua-500: #00A3A3;
+  --color-teal-600: #008080; /* Testimonial card placeholder icon (legacy value) */
+  --color-teal-500: #51BFB6; /* Figma: Active tab indicator */
+  --color-aqua-300: #68E0CC; /* Figma: aqua-300 */
+  --color-grey-95: #ECFBF8; /* Figma: "Polar" background (a.k.a. mint-50) */
+  --color-mint-100: #EAF9F9; /* Figma: linear wash tint */
+  --color-white: #FFF;
+  --color-black: #000;
+
+  --color-blue-100: #D5E5F4; /* Figma: card/stroke */
+  --color-aqua-100: #D5F3F2; /* Figma: hero ambient glow */
+  --color-sky-300: #87CEF2;  /* Figma: card/shadowHover base */
+  --color-slate-50: #F7F9FB;  /* Figma: section neutral background */
+  --color-slate-200: #B8BFC7; /* Figma: process/neutral surface */
+  --color-neutral-600: #4E5059; /* Figma: neutral/body description */
+  --color-slate-700: #364153; /* Figma: FinalCta body description */
+
+  /* Alpha variants: <palette>-alpha-<opacity %> */
+  --color-white-alpha-10: rgb(255 255 255 / 10%);
+  --color-white-alpha-25: rgb(255 255 255 / 25%);
+  --color-white-alpha-80: rgb(255 255 255 / 80%);
+  --color-white-alpha-85: rgb(255 255 255 / 85%);
+  --color-teal-alpha-12: rgb(0 163 163 / 12%);
+  --color-teal-alpha-20: rgb(0 163 163 / 20%);
+  --color-teal-alpha-40: rgb(0 163 163 / 40%);
+  --color-navy-alpha-04: rgb(0 57 93 / 4%);
+  --color-navy-alpha-06: rgb(0 57 93 / 6%);
+  --color-navy-alpha-08: rgb(0 57 93 / 8%);
+  --color-navy-alpha-12: rgb(0 57 93 / 12%);
+  --color-navy-alpha-15: rgb(0 57 93 / 15%);
+  --color-navy-alpha-18: rgb(0 57 93 / 18%);
+  --color-navy-alpha-20: rgb(0 57 93 / 20%);
+  --color-navy-alpha-25: rgb(0 57 93 / 25%);
+  --color-navy-alpha-55: rgb(0 57 93 / 55%);
+  --color-navy-400-alpha-75: rgb(7 69 111 / 75%); /* #07456F at 75% */
+  --color-navy-ink-alpha-25: rgb(1 38 66 / 25%);  /* #012642 at 25% */
+  --color-blue-alpha-25: rgb(213 229 244 / 25%);
+  --color-aqua-alpha-25: rgb(213 243 242 / 25%);
+  --color-aqua-300-alpha-25: rgb(104 224 204 / 25%);
+  --color-sky-alpha-25: rgb(135 206 242 / 25%);
+  --color-sky-alpha-50: rgb(135 206 242 / 50%);
+  --color-sky-alpha-65: rgb(135 206 242 / 65%);
+  --color-black-alpha-10: rgb(0 0 0 / 10%);
+  --color-black-alpha-20: rgb(0 0 0 / 20%);
+
+  /* --- Tier 2: Semantic Roles (Theme & Layout Mappings) --- */
+  --color-bg: var(--color-white);
+  --color-bg-subtle: var(--color-slate-50);
+  --color-surface: var(--color-grey-95);
+  --color-surface-raised: var(--color-white);
+  --color-surface-inverse: var(--color-navy-500);
+  --color-surface-muted: var(--color-slate-200);
+
+  --color-overlay-white: var(--color-white-alpha-85);
+
+  --color-border: var(--color-teal-alpha-20);
+  --color-border-subtle: var(--color-navy-alpha-12);
+  --color-border-accent: var(--color-aqua-300);
+  --color-border-tab-active: var(--color-teal-500); /* #51BFB6 */
+  --color-border-card: var(--color-blue-100);
+  --color-border-inverse-subtle: var(--color-white-alpha-10);
+
+  --color-text-primary: var(--color-navy-500);
+  --color-text-secondary: var(--color-neutral-600);
+  --color-text-muted: var(--color-navy-alpha-55);
+  --color-text-inverted: var(--color-white);
+  --color-text-inverted-muted: var(--color-white-alpha-80);
+
+  --color-primary: var(--color-navy-500);
+  --color-primary-hover: var(--color-aqua-500);
+
+  --color-accent: var(--color-aqua-500);
+  --color-accent-subtle: var(--color-grey-95);
+  --color-focus-ring: var(--color-aqua-500);
+
+  /* Gradients */
+  --gradient-hero-glow: radial-gradient(58.07% 88.19% at 17.99% 3.33%, var(--color-sky-300) 4.85%, var(--color-aqua-100) 50%, var(--color-white) 100%);
+  --gradient-linear-wash: linear-gradient(90deg, var(--color-white) 0%, var(--color-mint-100) 50%, var(--color-white) 100%);
+  --gradient-dark-navy: linear-gradient(135deg, var(--color-navy-950) 0%, var(--color-navy-800) 100%);
+  --gradient-split-radial: radial-gradient(69.11% 69.11% at 50.26% 14.87%, var(--color-sky-alpha-25) 0%, var(--color-aqua-alpha-25) 50%, var(--color-white-alpha-25) 100%);
+  --gradient-vertical-selector: radial-gradient(44.47% 44.21% at 54.11% 55.27%, var(--color-sky-300) 7.67%, var(--color-aqua-100) 50%, var(--color-white) 100%);
+  --gradient-final-cta: linear-gradient(107.92deg, var(--color-aqua-100) 0%, var(--color-grey-95) 100%);
+  --gradient-switch-support: linear-gradient(138.18deg, var(--color-navy-500) 0%, var(--color-navy-900) 100%);
+  --gradient-side-by-side: radial-gradient(53.7% 53.29% at 52.69% 64.36%, var(--color-sky-300) 7.67%, var(--color-aqua-100) 50%, var(--color-white) 100%);
+
+  /* Section Layout Spacing — vertical padding for standard content section
+     containers on desktop. Change this single value to re-tune every
+     section's desktop rhythm at once. */
+  --space-section-block: 5.5rem; /* 88px */
+
+  /* --- Tier 3: Component Intent Tokens (shared or themeable component APIs) --- */
+
+  /* Eyebrows */
+  --color-eyebrow-brand: var(--color-primary);
+  --color-eyebrow-guidance: var(--color-navy-850);
+
+  /* Buttons */
+  --color-btn-primary-bg: var(--color-primary);
+  --color-btn-primary-text: var(--color-text-inverted);
+  --color-btn-primary-hover-bg: var(--color-border-accent);
+  --color-btn-primary-hover-text: var(--color-primary);
+
+  --color-btn-secondary-bg: var(--color-grey-95);
+  --color-btn-secondary-text: var(--color-primary);
+  --color-btn-secondary-border: var(--color-primary);
+  --color-btn-secondary-hover-bg: var(--color-border-accent);
+  --color-btn-secondary-hover-border: var(--color-border-accent);
+  --color-btn-secondary-hover-text: var(--color-primary);
+
+  --color-btn-outline-bg: transparent;
+  --color-btn-outline-border: var(--color-primary);
+  --color-btn-outline-text: var(--color-primary);
+  --color-btn-outline-hover-bg: var(--color-border-accent);
+  --color-btn-outline-hover-border: var(--color-border-accent);
+  --color-btn-outline-hover-text: var(--color-primary);
+
+  --color-btn-tertiary-bg: var(--color-white);
+
+  --color-btn-link-text: var(--color-primary);
+  --color-btn-link-hover-text: var(--color-primary-hover);
+
+  /* Editorial Text Links */
+  --color-link-default: var(--color-primary);
+  --color-link-inverted: var(--color-text-inverted);
+  --color-link-inverted-hover: var(--color-border-accent);
+
+  /* Filter Chips */
+  --color-chip-bg: var(--color-surface-raised);
+  --color-chip-text: var(--color-text-primary);
+  --color-chip-border: var(--color-navy-alpha-18);
+  --color-chip-border-hover: var(--color-border-accent);
+  --color-chip-selected-bg: var(--color-primary);
+  --color-chip-selected-text: var(--color-text-inverted);
+  --color-chip-selected-border: var(--color-primary);
+  --color-chip-selected-hover-bg: var(--color-primary-hover);
+  --color-chip-selected-hover-border: var(--color-primary-hover);
+
+  /* Tab Buttons */
+  --color-tab-bg: var(--color-surface-raised);
+  --color-tab-text: var(--color-text-primary);
+  --color-tab-border: var(--color-border-subtle);
+  --color-tab-icon: var(--color-accent);
+  --color-tab-hover-bg: var(--color-surface);
+  --color-tab-hover-text: var(--color-text-primary);
+  --color-tab-hover-border: var(--color-border-accent); /* #68E0CC Vibrant Turquoise */
+  --color-tab-hover-icon: var(--color-accent);
+  --color-tab-active-bg: var(--color-primary);
+  --color-tab-active-text: var(--color-text-inverted);
+  --color-tab-active-border: var(--color-border-tab-active); /* #51BFB6 */
+  --color-tab-active-icon: var(--color-border-accent);
+
+  /* Badges */
+  --color-badge-aqua-bg: var(--color-surface);
+  --color-badge-aqua-text: var(--color-accent);
+  --color-badge-aqua-border: var(--color-teal-alpha-40);
+  --color-badge-neutral-bg: var(--color-surface-raised);
+  --color-badge-neutral-text: var(--color-text-primary);
+  --color-badge-neutral-border: var(--color-navy-alpha-15);
+  --color-badge-dark-bg: var(--color-teal-alpha-20);
+  --color-badge-dark-text: var(--color-aqua-300);
+  --color-badge-dark-border: var(--color-teal-alpha-40);
+
+  /* Cards (QuickLink & QuickLinkSimple) */
+  --color-card-bg: var(--color-surface-raised);
+  --color-card-stroke: var(--color-blue-100);
+  --color-card-bg-inverse: var(--color-surface-inverse);
+  --color-card-ring-hover: var(--color-border-accent);
+  --color-card-icon-badge-bg: var(--color-surface);
+  --color-card-icon-badge-bg-hover: var(--color-teal-alpha-20);
+  --color-card-icon-color: var(--color-primary);
+  --color-card-icon-color-hover: var(--color-border-accent);
+  --color-card-placeholder-bg: var(--color-navy-alpha-04);
+  --color-card-placeholder-border: var(--color-navy-alpha-08);
+  --color-card-placeholder-pattern: var(--color-navy-alpha-06);
+
+  /* Snipe CTA Header Gap — kept global: its exact 6.5px rem ratio needs the 6-decimal
+     precision that stylelint allows only in tokens.css */
+  --space-snipe-cta-header-gap: 0.40625rem; /* 6.5px */
+
+  /* Shadows (Figma Elevation Tokens) */
+  --shadow-elevation-sm: 0 1px 2px 0 var(--color-black-alpha-10);
+  --shadow-elevation-md: 0 4px 12px 0 var(--color-black-alpha-10);
+  --shadow-card-hover: 0 10px 14px 0 var(--color-sky-alpha-50);
+  --shadow-card-hover-intense: 0 14px 20px 0 var(--color-sky-alpha-65);
+  --shadow-chip-hover: 0 2px 8px var(--color-aqua-300-alpha-25);
+  --shadow-ring-hover: 0 0 0 2px var(--color-border-accent); /* reusable 2px hover ring for interactive cards */
+
+  /* ==========================================================================
+     Foundation Scales (primitive tier): typography, spacing, layout, radii,
+     borders, z-index, elevation and motion
+     ========================================================================== */
+
+  /* --- Typography Families --- */
+  --font-family-sans: var(--font-albert-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-family-display: var(--font-albert-sans), sans-serif;
+  --font-family-eyebrow: var(--font-league-spartan), sans-serif;
+  --font-family-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  /* --- Font Sizes (Fluid Clamp: 768px Mobile -> 1200px Desktop) --- */
+  --font-size-base: 1rem;                                                  /* 16px, document body size (matches the root default) */
+  --font-size-micro: 0.75rem;                                              /* 12px */
+  --font-size-body-sm: 0.875rem;                                           /* 14px */
+  --font-size-caption: var(--font-size-body-sm);                           /* 14px, caption role (same size as body-sm today) */
+  --font-size-body: 1rem;                                                  /* 16px */
+  --font-size-btn: 1rem;                                                   /* 16px (Figma: Button Label) */
+  --font-size-body-lg: clamp(1.125rem, 0.902rem + 0.46vw, 1.25rem);        /* 18px -> 20px */
+  --font-size-subhead: clamp(1.125rem, 0.463rem + 1.39vw, 1.5rem);         /* 18px -> 24px */
+  --font-size-label: 1.125rem;                                             /* 18px */
+  --font-size-h4: 1.25rem;                                                 /* 20px */
+  --font-size-h3: clamp(1.375rem, 0.708rem + 1.39vw, 1.75rem);             /* 22px -> 28px */
+  --font-size-h2: clamp(1.75rem, 0.417rem + 2.78vw, 2.5rem);               /* 28px -> 40px */
+  --font-size-h1: clamp(2.125rem, 0.125rem + 4.17vw, 3.25rem);             /* 34px -> 52px */
+  --font-size-stat: clamp(2.5rem, 0.278rem + 4.63vw, 3.75rem);             /* 40px -> 60px */
+  --font-size-stat-sm: 2.5rem;                                             /* 40px (fixed) */
+  --font-size-stat-hero: clamp(2.5rem, 4vw, 3.25rem);                      /* 40px -> 52px (SplitContentCards hero metric) */
+  --font-size-hero-h2: clamp(2rem, 0.444rem + 6.48vw, 4.5rem);             /* 32px (mobile) -> 72px (desktop) */
+  --font-size-eyebrow: 1rem;                                               /* 16px */
+  --font-size-footer-title-mobile: 0.71875rem;                             /* 11.5px */
+  --font-size-footer-title-desktop: 1.125rem;                              /* 18px */
+
+  /* --- Line Heights (Strict 4px Vertical Rhythm Grid) --- */
+  --line-height-normal: normal;                                            /* UA default, document body line height */
+  --line-height-tight: 1.15;                                               /* Unitless, SplitContentCards title */
+  --line-height-relaxed: 1.6;                                              /* Unitless, VerticalSelectorFeatureCard body copy */
+  --line-height-none: 1;                                                   /* Unitless 1:1, for tight numeric displays */
+  --line-height-micro: 1rem;                                               /* 16px (4x4) */
+  --line-height-caption: 1rem;                                             /* 16px (4x4) */
+  --line-height-body-sm: 1.25rem;                                          /* 20px (5x4) */
+  --line-height-btn: 1.25rem;                                              /* 20px (5x4 - Figma: Button Label) */
+  --line-height-body: 1.5rem;                                              /* 24px (6x4) */
+  --line-height-h4: 1.5rem;                                                /* 24px (6x4) */
+  --line-height-body-lg: 1.6875rem;                                        /* 27px */
+  --line-height-label: 1.75rem;                                            /* 28px (7x4) */
+  --line-height-eyebrow: 1.125rem;                                         /* 18px */
+  --line-height-subhead: clamp(1.75rem, 0.86rem + 1.85vw, 2rem);           /* 28px -> 32px (4x grid) */
+  --line-height-h3: clamp(1.75rem, 0.86rem + 1.85vw, 2.25rem);             /* 28px -> 36px (4x grid) */
+  --line-height-h2: 2.875rem;                                              /* 46px */
+  --line-height-h1: clamp(2.5rem, -1.056rem + 7.41vw, 3.75rem);            /* 40px -> 60px (4x grid) */
+  --line-height-stat: clamp(2.75rem, 0.528rem + 4.63vw, 4rem);             /* 44px -> 64px (4x grid) */
+  --line-height-stat-sm: 2.75rem;                                          /* 44px (fixed, 4x grid) */
+  --line-height-display: clamp(2.75rem, -2.861rem + 11.8vw, 4.75rem);      /* 44px -> 76px (4x grid) */
+  --line-height-hero-h2: clamp(2rem, 0.389rem + 6.71vw, 4.75rem);          /* 32px (mobile 100%) -> 76px (desktop) */
+  --line-height-footer-title-mobile: 1.078125rem;                          /* 17.25px */
+  --line-height-footer-title-desktop: 1.75rem;                             /* 28px (7x4 grid) */
+
+  /* --- Tracking (Letter Spacing) --- */
+  --tracking-display: -0.4px;
+  --tracking-hero-h2-desktop: -0.4px;
+  --tracking-hero-h2-mobile: -0.4px;
+  --tracking-h1: -0.32px;
+  --tracking-h2: -0.24px;
+  --tracking-h3: -0.16px;
+  --tracking-stat: -0.16px;
+  --tracking-normal: 0;
+  --tracking-wider: 0.08em;
+  --tracking-eyebrow: 2.2px;
+  --tracking-footer-title-mobile: 1.035px;
+  --tracking-footer-title-desktop: 0px;
+
+  /* --- Font Weights --- */
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-black: 800;
+
+  /* Smallest allowed pointer target, per WCAG 2.2 SC 2.5.8 (Target Size, Minimum). */
+  --size-target-min: 1.5rem; /* 24px */
+
+  /* --- Fluid Spacing Scale (clamp: min, preferred, max) --- */
+  --space-3xs: clamp(0.125rem, 0.1rem + 0.1vw, 0.25rem);
+  --space-2xs: clamp(0.25rem, 0.2rem + 0.25vw, 0.375rem);
+  --space-xs: clamp(0.5rem, 0.45rem + 0.25vw, 0.625rem);
+  --space-sm: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+  --space-md: 1rem;
+  --space-lg: clamp(1.5rem, 1.35rem + 0.75vw, 1.875rem);
+  --space-xl: clamp(2rem, 1.75rem + 1.25vw, 2.75rem);
+  --space-2xl: clamp(3rem, 2.5rem + 2.5vw, 4.5rem);
+  --space-3xl: clamp(4rem, 3.25rem + 3.75vw, 6rem);
+  --space-4xl: 4rem; /* 64px (fixed) */
+
+  /* --- Layout & Container Widths --- */
+  --container-max-w: 1200px;
+  --container-gutter: clamp(1rem, 0.75rem + 1.25vw, 2.5rem);
+
+  /* --- Radii --- */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-md-lg: 0.625rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-full: 9999px;
+
+  /* --- Borders & Focus Rings --- */
+  --border-width-thin: 1px;
+  --border-width-thick: 2px;
+  --focus-ring-width: var(--border-width-thick);
+  --focus-ring-offset: 2px;
+  --focus-ring-offset-md: 3px;
+  --focus-ring-offset-lg: 4px;
+  --focus-ring-offset-inset: -2px;
+  --focus-ring-offset-inset-lg: -4px;
+
+  /* --- Z-Index Layers --- */
+  --z-modal: 9999;
+
+  /* --- Elevations (Shadows) — generic scale; distinct values from the Figma
+     --shadow-elevation-* tokens above, so the two scales are not merged --- */
+  --shadow-sm: 0 1px 2px 0 hsl(220deg 25% 10% / 5%);
+  --shadow-md: 0 4px 6px -1px hsl(220deg 25% 10% / 8%), 0 2px 4px -2px hsl(220deg 25% 10% / 6%);
+  --shadow-lg: 0 10px 15px -3px hsl(220deg 25% 10% / 8%), 0 4px 6px -4px hsl(220deg 25% 10% / 5%);
+
+  /* --- Transitions & Timing ---
+     Figma Smart Animate: 300ms ease-out (--duration-smart + --ease-out-smart).
+     --transition-fast keeps its own standard easing (0.4, 0, 0.2, 1), which differs from
+     --ease-out-smart, so the two timing systems are not merged. */
+  --ease-out-smart: cubic-bezier(0, 0, 0.2, 1);
+  --duration-smart: 300ms;
+  --duration-fast: 150ms;
+  --transition-fast: var(--duration-fast) cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Explicit property list rather than `all`. Transitioning `all` makes the browser
+     watch every animatable property, so a layout property added to a state rule later
+     silently starts animating - and reflowing - every frame. Components that do mean to
+     animate layout append those properties themselves (see Button, QuickLinkSimple).
+     Focus rings are deliberately excluded so they appear instantly. */
+  --transition-ui:
+    color var(--duration-smart) var(--ease-out-smart),
+    background-color var(--duration-smart) var(--ease-out-smart),
+    border-color var(--duration-smart) var(--ease-out-smart),
+    box-shadow var(--duration-smart) var(--ease-out-smart),
+    opacity var(--duration-smart) var(--ease-out-smart),
+    transform var(--duration-smart) var(--ease-out-smart),
+    text-decoration-color var(--duration-smart) var(--ease-out-smart),
+    fill var(--duration-smart) var(--ease-out-smart);
+
+  /* Near-zero rather than 0 so transitionend / animationend events still fire. */
+  --duration-reduced-motion: 0.01ms;
+}
+
+
+/* ==========================================================================
+   Contextual Dark Theme Overrides
+   Any element inside [data-theme="dark"] will automatically inherit these flipped values.
+   This replaces all the manual `isDark ? "vibrant" : "accent"` JS logic.
+   ========================================================================== */
+[data-theme="dark"] {
+  --color-accent: var(--color-aqua-300); /* Flips aqua-500 to aqua-300 automatically */
+  --color-text-primary: var(--color-white);
+  --color-text-secondary: var(--color-sky-300);
+  --color-text-muted: var(--color-text-inverted-muted);
+
+  /* Buttons on dark surfaces use the Polar background (Figma: grey-95) */
+  --color-btn-primary-bg: var(--color-grey-95);
+  --color-btn-primary-text: var(--color-primary);
+  --color-btn-secondary-bg: var(--color-grey-95);
+  --color-btn-outline-bg: var(--color-grey-95);
+  --color-btn-tertiary-bg: var(--color-grey-95);
+}

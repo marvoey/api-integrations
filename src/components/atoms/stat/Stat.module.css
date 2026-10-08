@@ -1,0 +1,44 @@
+.stat {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-stat);
+  line-height: var(--line-height-stat);
+  letter-spacing: var(--tracking-stat);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  margin: 0;
+  display: block;
+}
+
+.sizeSm {
+  font-size: var(--font-size-stat-sm);
+  line-height: var(--line-height-stat-sm);
+}
+
+/* Semantic Color Modifiers */
+.colorPrimary {
+  color: var(--color-text-primary);
+}
+
+.colorSecondary {
+  color: var(--color-text-secondary);
+}
+
+.colorInverted {
+  color: var(--color-text-inverted);
+}
+
+.colorInvertedMuted {
+  color: var(--color-text-inverted-muted);
+}
+
+.colorAccent {
+  color: var(--color-accent);
+}
+
+.colorVibrant {
+  color: var(--color-border-accent);
+}
+
+.colorInherit {
+  color: inherit;
+}

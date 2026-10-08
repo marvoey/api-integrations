@@ -1,0 +1,210 @@
+.section {
+  width: 100%;
+  background: var(--color-bg-subtle);
+}
+
+.container {
+  composes: container from "../../../styles/layout.module.css";
+  display: flex;
+  flex-direction: column;
+  padding-block: var(--space-section-block);
+}
+
+@media (width < 768px) {
+  .container {
+    padding-block: 2rem; /* 32px on mobile */
+  }
+}
+
+/* Div 1: Header Row */
+.headerRow {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: var(--space-xl);
+}
+
+@media (width < 768px) {
+  .headerRow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-lg);
+  }
+}
+
+/* Col 1: Text Section */
+.headerContent {
+  width: 100%;
+  max-width: 36.5625rem; /* 585px */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  gap: var(--space-md); /* 16px gap between texts */
+}
+
+.eyebrow {
+  color: var(--color-accent);
+  margin: 0;
+}
+
+.title {
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.description {
+  color: var(--color-text-secondary);
+  margin: 0;
+  font-size: var(--font-size-body-lg);
+  line-height: var(--line-height-body-lg);
+}
+
+/* Col 2: CTA Column */
+.headerCta {
+  flex-shrink: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+@media (width < 768px) {
+  .headerCta {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .cta {
+    width: 100%;
+  }
+}
+
+/* Div 2: Cards Row — 3-column grid on desktop */
+.cardsRow {
+  width: 100%;
+  margin-top: 3rem; /* 48px */
+  margin-bottom: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  align-items: stretch;
+}
+
+/* Mobile: horizontal CSS scroll-snap track (zero JS). Exactly one card is
+   fully visible with ~25% of the next card peeking at the right edge. */
+@media (width < 768px) {
+  .cardsRow {
+    margin-top: 2rem;
+    display: flex;
+    grid-template-columns: none;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 1rem;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE/Edge */
+  }
+
+  .cardsRow::-webkit-scrollbar {
+    display: none; /* Chrome/Safari */
+  }
+}
+
+.cardItem {
+  display: flex;
+  width: 100%;
+}
+
+@media (width < 768px) {
+  .cardItem {
+    flex: 0 0 calc(78% - 1rem);
+    scroll-snap-align: start;
+  }
+}
+
+/* Card */
+.card {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--radius-xl); /* 16px */
+  border: var(--border-width-thin) solid var(--color-border-card);
+  background-color: var(--color-surface-raised);
+  overflow: hidden;
+  box-sizing: border-box;
+  box-shadow: var(--shadow-elevation-sm);
+  transition: var(--transition-ui);
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-ring-hover), var(--shadow-elevation-md);
+  border-color: var(--color-border-accent);
+}
+
+.cardLink {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  color: inherit;
+  text-decoration: none;
+}
+
+.cardLink:focus-visible {
+  outline: var(--focus-ring-width) solid var(--color-focus-ring);
+  outline-offset: var(--focus-ring-offset-inset);
+}
+
+.mediaWrapper {
+  position: relative;
+  width: 100%;
+  height: 210px; /* 16:9-ish fixed banner height */
+  overflow: hidden;
+  background-color: var(--color-surface);
+  flex-shrink: 0;
+}
+
+.mediaWrapper img.thumbnail,
+.mediaWrapper .thumbnail,
+.thumbnail {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform var(--duration-smart) var(--ease-out-smart);
+}
+
+.card:hover .thumbnail {
+  transform: scale(1.03);
+}
+
+.cardBadge {
+  position: absolute;
+  top: 13.5px;
+  left: 13.5px;
+  z-index: 2;
+}
+
+.content {
+  padding: 1.25rem; /* 20px, exact geometry per spec */
+  box-sizing: border-box;
+  min-height: 44px; /* touch target */
+}
+
+.cardTitle {
+  margin: 0;
+  color: var(--color-text-primary);
+  overflow-wrap: break-word;
+}
+
+/* Forced colors (Windows High Contrast): box-shadows are dropped and author colors are replaced
+   by the user's palette, so indicators drawn only with shadows or color changes disappear.
+   System colors restore them: Highlight marks focus, hover and selected states. */
+@media (forced-colors: active) {
+  .card:hover {
+    border-color: Highlight;
+  }
+}

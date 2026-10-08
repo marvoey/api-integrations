@@ -1,0 +1,115 @@
+.section {
+  width: 100%;
+  background: var(--gradient-side-by-side);
+}
+
+.container {
+  composes: container from "../../../styles/layout.module.css";
+  padding-block: var(--space-section-block); /* 88px */
+}
+
+.card {
+  display: grid;
+  grid-template-columns: 1fr;
+  border-radius: 1.5rem; /* 24px — no matching token; --radius-xl resolves to 1rem/16px in this codebase */
+  overflow: hidden;
+  box-shadow: var(--shadow-elevation-md);
+}
+
+.cardDark {
+  background: var(--gradient-dark-navy);
+}
+
+.cardLight {
+  background: var(--color-white);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  text-align: left;
+  padding: 2rem 1.5rem; /* 32px/24px mobile */
+  order: 2; /* mobile: image stacks above content for both variants */
+  border-radius: 0 0 1.5rem 1.5rem;
+}
+
+.eyebrow {
+  margin-bottom: var(--space-md);
+}
+
+.headline {
+  margin-bottom: var(--space-md);
+}
+
+.body {
+  /* Component token */
+  --space-side-by-side-text-margin-bottom: 2rem;  /* 32px */
+
+  margin-bottom: var(--space-side-by-side-text-margin-bottom); /* 32px */
+}
+
+.headlineDark {
+  color: var(--color-text-inverted);
+}
+
+.headlineLight {
+  color: var(--color-text-primary);
+}
+
+.imageColumn {
+  /* Component token (mobile image height) */
+  --size-side-by-side-image-mobile: 14.375rem;  /* 230px */
+
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 320px;
+  order: 1; /* mobile: image stacks above content for both variants */
+  border-radius: 1.5rem 1.5rem 0 0;
+  overflow: hidden;
+}
+
+.image {
+  object-fit: cover;
+}
+
+@media (width < 768px) {
+  .imageColumn {
+    height: var(--size-side-by-side-image-mobile);
+    min-height: var(--size-side-by-side-image-mobile);
+  }
+}
+
+@media (width >= 1024px) {
+  .card {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .content {
+    padding: 2.5rem 3rem; /* 40px/48px desktop */
+  }
+
+  /* Variant A (dark): text left, image right */
+  .contentOrderFirst {
+    order: 1;
+    border-radius: 1.5rem 0 0 1.5rem;
+  }
+
+  .imageColumnRight {
+    order: 2;
+    border-radius: 0 1.5rem 1.5rem 0;
+  }
+
+  /* Variant B (light): text right, image left */
+  .contentOrderLast {
+    order: 2;
+    border-radius: 0 1.5rem 1.5rem 0;
+  }
+
+  .imageColumnLeft {
+    order: 1;
+    border-radius: 1.5rem 0 0 1.5rem;
+  }
+}

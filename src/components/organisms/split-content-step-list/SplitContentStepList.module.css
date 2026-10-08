@@ -1,0 +1,88 @@
+.section {
+  width: 100%;
+  background: var(--gradient-dark-navy);
+  padding-block: clamp(3rem, 5vw, 5rem);
+}
+
+@media (width < 768px) {
+  .section {
+    padding-block: 2rem; /* half, 32px */
+  }
+}
+
+.container {
+  composes: container from "../../../styles/layout.module.css";
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px clamp(2rem, 4vw, 4rem);
+}
+
+@media (width >= 1024px) {
+  .container {
+    grid-template-columns: 1.5fr 2fr;
+    row-gap: 124px;
+    align-items: center;
+  }
+}
+
+.textCol {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-md);
+  min-width: 0;
+}
+
+.eyebrow {
+  margin: 0;
+}
+
+.title {
+  color: var(--color-text-inverted);
+  margin: 0;
+}
+
+.description {
+  margin: 0;
+}
+
+.cta {
+  margin-top: var(--space-sm);
+  width: 100%;
+}
+
+@media (width >= 1024px) {
+  .cta {
+    width: fit-content;
+  }
+}
+
+.stepList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  width: 100%;
+}
+
+.stepItem {
+  width: 100%;
+}
+
+.stepCard {
+  max-width: none;
+  width: 100%;
+  cursor: default;
+}
+
+/* SplitContentStepList step cards should not have hover effect */
+.stepItem .stepCard:hover,
+.stepItem .stepCard:active,
+.stepItem > *:hover,
+.stepItem > *:active {
+  transform: none !important;
+  box-shadow: none !important;
+  border-color: var(--color-border-inverse-subtle) !important;
+}

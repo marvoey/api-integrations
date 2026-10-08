@@ -1,0 +1,120 @@
+import { contentType } from '@optimizely/cms-sdk';
+import { EslMegaMenuContentType } from './EslMegaMenu';
+
+export const EslHeaderContentType = contentType({
+  key: 'ESLHeader',
+  displayName: 'ESL Header',
+  baseType: '_component',
+  properties: {
+    brandLogo: {
+      type: 'contentReference',
+      displayName: 'Brand Logo Image',
+      group: 'content',
+      sortOrder: 10,
+      allowedTypes: ['_image'],
+    },
+    brandLogoAlt: {
+      type: 'string',
+      displayName: 'Brand Logo Alt Text',
+      group: 'content',
+      sortOrder: 15,
+    },
+    brandHref: {
+      type: 'string',
+      displayName: 'Brand Logo Link URL',
+      group: 'content',
+      sortOrder: 20,
+    },
+    megaMenus: {
+      type: 'array',
+      displayName: 'Mega Menus',
+      group: 'content',
+      sortOrder: 25,
+      items: {
+        type: 'component',
+        contentType: EslMegaMenuContentType,
+      },
+    },
+    navLinks: {
+      type: 'array',
+      displayName: 'Navigation Links',
+      group: 'content',
+      sortOrder: 30,
+      items: {
+        type: 'link',
+      },
+    },
+    ctaVariant: {
+      type: 'string',
+      format: 'selectOne',
+      displayName: 'Primary CTA Variant',
+      group: 'content',
+      sortOrder: 38,
+      enum: [
+        { value: 'dark', displayName: 'Dark (Navy)' },
+        { value: 'light', displayName: 'Light' },
+      ],
+    },
+    ctaIcon: {
+      type: 'string',
+      format: 'selectOne',
+      displayName: 'Primary CTA Icon',
+      group: 'content',
+      sortOrder: 40,
+      enum: [
+        { value: 'none', displayName: 'None' },
+        { value: 'user', displayName: 'User' },
+        { value: 'arrow-right', displayName: 'Arrow Right' },
+        { value: 'sparkles', displayName: 'Sparkles' },
+        { value: 'check', displayName: 'Check' },
+        { value: 'landmark', displayName: 'Landmark / Checking' },
+        { value: 'wallet', displayName: 'Wallet / Debit Cards' },
+        { value: 'credit-card', displayName: 'Credit Card' },
+        { value: 'key-round', displayName: 'Key / Mortgage' },
+        { value: 'shield-check', displayName: 'Shield Check' },
+      ],
+    },
+    cta: {
+      type: 'link',
+      displayName: 'Primary CTA Link',
+      group: 'content',
+      sortOrder: 42,
+    },
+    secondaryCtaVariant: {
+      type: 'string',
+      format: 'selectOne',
+      displayName: 'Secondary CTA Variant',
+      group: 'content',
+      sortOrder: 44,
+      enum: [
+        { value: 'dark', displayName: 'Dark (Navy)' },
+        { value: 'light', displayName: 'Light' },
+      ],
+    },
+    secondaryCtaIcon: {
+      type: 'string',
+      format: 'selectOne',
+      displayName: 'Secondary CTA Icon',
+      group: 'content',
+      sortOrder: 45,
+      enum: [
+        { value: 'none', displayName: 'None' },
+        { value: 'user', displayName: 'User' },
+        { value: 'arrow-right', displayName: 'Arrow Right' },
+        { value: 'sparkles', displayName: 'Sparkles' },
+        { value: 'check', displayName: 'Check' },
+        { value: 'landmark', displayName: 'Landmark / Checking' },
+        { value: 'wallet', displayName: 'Wallet / Debit Cards' },
+        { value: 'credit-card', displayName: 'Credit Card' },
+        { value: 'key-round', displayName: 'Key / Mortgage' },
+        { value: 'shield-check', displayName: 'Shield Check' },
+      ],
+    },
+    secondaryCta: {
+      type: 'link',
+      displayName: 'Secondary CTA Link',
+      group: 'content',
+      sortOrder: 47,
+    },
+  },
+});

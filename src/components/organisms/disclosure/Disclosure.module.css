@@ -1,0 +1,32 @@
+.section {
+  width: 100%;
+  background-color: var(--color-bg);
+  padding-block: var(--space-section-block);
+}
+
+@media (width < 768px) {
+  .section {
+    padding-block: 30px;
+  }
+}
+
+.container {
+  composes: container from "../../../styles/layout.module.css";  
+}
+
+.content{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+
+
+.heading {
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.line {
+  margin: 0;
+}
